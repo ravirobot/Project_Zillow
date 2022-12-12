@@ -80,3 +80,11 @@ def clean_and_fixing(data):
 
     return df
 
+
+def split_data(data):
+  df = data.copy()
+  df['year'] = df['transactiondate'].dt.year
+  valid_Size = int (.8 * len(df))
+  df_new = df.sort_values("year")
+  train,valid = df_new[:valid_Size],df_new[valid_Size:]
+  return train,valid
